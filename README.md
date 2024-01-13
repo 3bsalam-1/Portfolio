@@ -19,7 +19,7 @@
 
 -Ai model that detects if you are sad or happy using image classification and computer vision using **Python**.
 
-![Image Classification](/assets/img/icon.ico)
+![Image Classification](/assets/img/icon-Copy.ico)
 
 ### Soundify
 
@@ -27,7 +27,7 @@
 
 -A **Python** application that can read text from images and convert it to sound.
 
-![Soundify](/assets/img/icon-Copy.ico)
+![Soundify](/assets/img/icon.ico)
 
 ### Student Record
 
