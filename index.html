@@ -1,173 +1,276 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32" />
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Ahmed Abdulsalam's Blog</title>
-	<!---custom css link---->
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-
-	 <link rel="stylesheet"
-  href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmed Mohamed - AI/ML Engineer</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon.png">
+    <link rel="apple-touch-icon" href="img/favicon.png">
+    <meta name="theme-color" content="#00d4ff">
 </head>
 <body>
+    <canvas class="neural-background" id="neuralCanvas"></canvas>
+    
+    <nav id="navbar">
+        <div class="container">
+            <div class="logo">
+                <img src="https://avatars.githubusercontent.com/u/121203923?v=4" alt="Ahmed Mohamed" class="logo-image">
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><button class="theme-toggle" id="themeToggle">🌙</button></li>
+            </ul>
+        </div>
+    </nav>
 
-	<!----header design--->
-	<header>
-		<a href="#" class="logo">Bl<span>o</span>g.</a>
+    <section class="hero" id="home">
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <h1>Ahmed Mohamed</h1>
+            <h2>AI / Machine Learning Engineer</h2>
+            <p>Building intelligent solutions with Python, TensorFlow, and PyTorch. Specialized in deep learning, computer vision, and end-to-end ML deployment.</p>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn btn-primary">View Projects</a>
+                <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+            </div>
+        </div>
+    </section>
 
-		<ul class="navlist">
-			<li><a href="#home" class="active">Home</a></li>
-			<li><a href="#about">About Me</a></li>
-			<li><a href="#services">Services</a></li>
-			<li><a href="#portfolio">Portfolio</a></li>
-			<li><a href="#contact">Contact Me</a></li>
-		</ul>
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="profile-image-container">
+                    <div class="profile-image-bg"></div>
+                    <img src="https://avatars.githubusercontent.com/u/121203923?v=4" alt="Ahmed Mohamed" class="profile-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div style="display: none; width: 300px; height: 300px; border-radius: 20px; background: linear-gradient(135deg, var(--accent), var(--accent-secondary)); align-items: center; justify-content: center; font-size: 4rem; border: 3px solid var(--accent);">👨‍💻</div>
+                </div>
+                <div class="about-text">
+                    <h3>Passionate AI/ML Engineer</h3>
+                    <p>Recent Computer Science graduate from Suez Canal University with a strong foundation in artificial intelligence and machine learning. I specialize in building end-to-end ML solutions, from data preprocessing and model development to deployment using FastAPI and desktop applications.</p>
+                    <p>With experience in TensorFlow, PyTorch, and scikit-learn, I bring discipline, resilience, and strong teamwork capabilities to every project. My volunteer leadership roles have sharpened my ability to collaborate effectively and drive innovation.</p>
+                </div>
+            </div>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h4>🐍 Programming</h4>
+                        <p>Python, Jupyter Notebook</p>
+                    </div>
+                    <div class="skill-category">
+                        <h4>🤖 Machine Learning</h4>
+                        <p>scikit-learn, Data Analysis, Preprocessing</p>
+                    </div>
+                    <div class="skill-category">
+                        <h4>🧠 Deep Learning</h4>
+                        <p>TensorFlow, PyTorch, Neural Networks</p>
+                    </div>
+                    <div class="skill-category">
+                        <h4>🚀 Deployment</h4>
+                        <p>FastAPI, Tkinter, CustomTkinter</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-		<div class="bx bx-menu" id="menu-icon">
-			
-		</div>
-	</header>
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="ml">Machine Learning</button>
+                <button class="filter-btn" data-filter="cv">Computer Vision</button>
+                <button class="filter-btn" data-filter="rl">Reinforcement Learning</button>
+                <button class="filter-btn" data-filter="api">API Development</button>
+                <button class="filter-btn" data-filter="nlp">NLP</button>
+            </div>
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Featured Projects -->
+                <div class="project-card" data-category="ml">
+                    <div class="project-image">🏥</div>
+                    <div class="project-info">
+                        <div class="project-tags">
+                            <span class="tag">Healthcare</span>
+                            <span class="tag">ML</span>
+                            <span class="tag">Mobile App</span>
+                        </div>
+                        <h3>FitSync</h3>
+                        <p>A holistic fitness ecosystem bridging workout tracking, nutrition management, and AI-driven insights with cross-platform mobile integration.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/3bsalam-1/FitSync" target="_blank" class="project-link">View Code →</a>
+                        </div>
+                    </div>
+                </div>
 
-	<!----home section design--->
-	<section class="home" id="home">
-		<div class="home-text">
-			<div class="slide">
-				<span class="one">Hello</span>
-				<span class="two">I'm</span>
-			</div>
-			<h1>Ahmed 3BSALAM</h1>
-			<h3>OS<span> Developer.</span></h3>
-			<p>OS Developer with 5+ years experience that keep customers <br> coming back for about services makes best effort.</p>
-			<div class="button">
-				<a href="#contact" class="btn">Say Hello</a>
-				<a href="#portfolio" class="btn2"><span><i class='bx bx-play'></i></span>Watch My Work</a>
-			</div>
-		</div>
-	</section>
+                <div class="project-card" data-category="rl">
+                    <div class="project-image">🏔️</div>
+                    <div class="project-info">
+                        <div class="project-tags">
+                            <span class="tag">Reinforcement Learning</span>
+                            <span class="tag">Q-Learning</span>
+                            <span class="tag">OpenAI Gym</span>
+                        </div>
+                        <h3>MountainCar</h3>
+                        <p>Professional, modular reinforcement learning implementation solving the MountainCar-v0 environment using Q-Learning algorithm.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/3bsalam-1/MountainCar" target="_blank" class="project-link">View Code →</a>
+                        </div>
+                    </div>
+                </div>
 
-	<!----about section design--->
-	<section class="about" id="about">
-		<div class="about-img">
-			<img src="img/about.jpg">
-		</div>
+                <div class="project-card" data-category="nlp">
+                    <div class="project-image">🔊</div>
+                    <div class="project-info">
+                        <div class="project-tags">
+                            <span class="tag">OCR</span>
+                            <span class="tag">TTS</span>
+                            <span class="tag">Desktop App</span>
+                        </div>
+                        <h3>Soundify - Arabic OCR & TTS</h3>
+                        <p>Python desktop application that converts Arabic text from images into spoken audio with dual OCR recognition modes in a unified interface.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/3bsalam-1/Soundify_Arabic-OCR-Text-to-Speech" target="_blank" class="project-link">View Code →</a>
+                        </div>
+                    </div>
+                </div>
 
-		<div class="about-text">
-			<h2>About <span>Me</span></h2>
-			<h4>Good Os Developer!</h4>
-			<p>IT Consulting. 24x7 Customer Support. Secure Payment Gateway. 24/7 Chat Support. Services: Technical Support, App development, Mobile Website Design</p>
-			<a href="https://www.facebook.com/3BSALAM.Alien/" class="btn">More About</a>
-		</div>
-	</section>
+                <div class="project-card" data-category="ml">
+                    <div class="project-image">🏡</div>
+                    <div class="project-info">
+                        <div class="project-tags">
+                            <span class="tag">Regression</span>
+                            <span class="tag">Deep Learning</span>
+                        </div>
+                        <h3>Regression Models</h3>
+                        <p>Comprehensive collection of regression model implementations using both ML and DL approaches for predicting housing prices.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/3bsalam-1/Regression-Models" target="_blank" class="project-link">View Code →</a>
+                        </div>
+                    </div>
+                </div>
 
-	<!----service section design--->
-	<section class="services" id="services">
-		<div class="main-text">
-			<p>What I am Expert In</p>
-			<h2><span>My</span> Services</h2>
-		</div>
+                <div class="project-card" data-category="api">
+                    <div class="project-image">🚗</div>
+                    <div class="project-info">
+                        <div class="project-tags">
+                            <span class="tag">FastAPI</span>
+                            <span class="tag">ML Model</span>
+                            <span class="tag">REST API</span>
+                        </div>
+                        <h3>Car Info API</h3>
+                        <p>Professional FastAPI-based REST API predicting car prices using Gradient Boosting ML model with intelligent price estimation.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/3bsalam-1/Car-Info" target="_blank" class="project-link">View Code →</a>
+                        </div>
+                    </div>
+                </div>
 
-		<div class="services-content">
-			<div class="box">
-				<div class="s-icons">
-					<i class='bx bx-mobile-alt' ></i>
-				</div>
-				<h3>Web Design</h3>
-				<p>Using Css, <br>and adobe illustrator,<br>and adobe photoshop.</p>
-				
-			</div>
+                <div class="project-card" data-category="cv">
+                    <div class="project-image">😊</div>
+                    <div class="project-info">
+                        <div class="project-tags">
+                            <span class="tag">Computer Vision</span>
+                            <span class="tag">CNN</span>
+                            <span class="tag">Deep Learning</span>
+                        </div>
+                        <h3>Mood Detection</h3>
+                        <p>Deep learning project detecting facial mood expressions (Happy vs Sad) using CNN with real-time prediction via camera or file upload.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/3bsalam-1/Mood-Detection" target="_blank" class="project-link">View Code →</a>
+                        </div>
+                    </div>
+                </div>
 
-			<div class="box">
-				<div class="s-icons">
-					<i class='bx bx-code-alt' ></i>
-				</div>
-				<h3>Web Development</h3>
-				<p>Using HTML,<br>and javascript.</p>
-				
-			</div>
+                <div class="project-card" data-category="cv">
+                    <div class="project-image">👤</div>
+                    <div class="project-info">
+                        <div class="project-tags">
+                            <span class="tag">Computer Vision</span>
+                            <span class="tag">Age Estimation</span>
+                            <span class="tag">Deep Learning</span>
+                        </div>
+                        <h3>Age Detector</h3>
+                        <p>Advanced deep learning model for accurate age estimation from facial images using convolutional neural networks.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/3bsalam-1/Age-Detector" target="_blank" class="project-link">View Code →</a>
+                        </div>
+                    </div>
+                </div>
 
-			<div class="box">
-				<div class="s-icons">
-					<i class='bx bx-edit-alt' ></i>
-				</div>
-				<h3>Apps Development</h3>
-				<p>Using C/C++,<br>and Java,<br>and python,<br>and Bash.</p>
-				
-			</div>
+                <div class="project-card" data-category="api">
+                    <div class="project-image">🍽️</div>
+                    <div class="project-info">
+                        <div class="project-tags">
+                            <span class="tag">API Development</span>
+                            <span class="tag">Computer Vision</span>
+                            <span class="tag">Food Recognition</span>
+                        </div>
+                        <h3>Calories Image Detector</h3>
+                        <p>AI-powered API that analyzes food images to detect and estimate calorie content for nutritional tracking and health monitoring.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/3bsalam-1/Calories-Image-Detector" target="_blank" class="project-link">View Code →</a>
+                        </div>
+                    </div>
+                </div>
 
-		</div>
-	</section>
+                <div class="project-card" data-category="cv">
+                    <div class="project-image">🔍</div>
+                    <div class="project-info">
+                        <div class="project-tags">
+                            <span class="tag">Computer Vision</span>
+                            <span class="tag">Image Retrieval</span>
+                            <span class="tag">Feature Extraction</span>
+                        </div>
+                        <h3>CBIR - Content-Based Image Retrieval</h3>
+                        <p>Content-Based Image Retrieval system using advanced feature extraction techniques to find similar images based on visual content.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/3bsalam-1/CBIR" target="_blank" class="project-link">View Code →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-	<!----portfolio section design--->
-	<section class="portfolio" id="portfolio">
-		<div class="main-text">
-			<p>Portfolio</p>
-			<h2><span>Latest</span> Project</h2>
-		</div>
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-content">
+                <p style="color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 2rem;">
+                    I'm always open to discussing new projects, creative ideas, or opportunities to contribute to innovative AI/ML solutions.
+                </p>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <h3>📧 Email</h3>
+                        <a href="mailto:3bsalam0@gmail.com">3bsalam0@gmail.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <h3>📱 Phone</h3>
+                        <a href="tel:+201003280029">+20 100 328 0029</a>
+                    </div>
+                    <div class="contact-item">
+                        <h3>💼 LinkedIn</h3>
+                        <a href="https://linkedin.com/in/ahmed-mohamed" target="_blank">Connect with me</a>
+                    </div>
+                    <div class="contact-item">
+                        <h3>💻 GitHub</h3>
+                        <a href="https://github.com/3bsalam-1" target="_blank">@3bsalam-1</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-		<div class="portfolio-content">
-			<div class="row">
-				<img src="img/portfolio1.jpg">
-				<div class="layer">
-					<h5>Student Record System</h5>
-					<p>Desktop app to manage students data and grades <br> made with java and sqlite database and gui made by java swing.</p>
-					<a href="https://drive.google.com/file/d/1B0ptc4N5bSf3gz595Ng2XqPT0r2guILU/view?usp=share_link"><i class='bx bx-link-external' ></i></a>
-				</div>
-			</div>
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Ahmed Mohamed. Built with passion for AI & Machine Learning.</p>
+        </div>
+    </footer>
 
-		</div>
-	</section>
-
-	<!----contact section design--->
-	<section class="contact" id="contact">
-		<div class="contact-text">
-			<h2>Contact <span>Me!</span></h2>
-			<h4>If You Have Any Project In Your Mind.</h4>
-			<p>I'm a App Designer - creating bold & brave interface design for companies all across the world.</p>
-			<div class="list">
-				<li><a href="#">0125943815</a></li>
-				<li><a href="#">am5054936@gmail.com</a></li>
-				<li><a href="#">Like Share & Subscribe</a></li>
-			</div>
-
-			<div class="contact-icons">
-				<a href="https://www.facebook.com/3BSALAM.Alien/"><i class='bx bxl-facebook' ></i></a>
-				<a href="https://twitter.com/3BSALAM_1"><i class='bx bxl-twitter' ></i></a>
-				<a href="https://www.instagram.com/3bsalam.1/"><i class='bx bxl-instagram-alt' ></i></a>
-				<a href="https://www.linkedin.com/in/ahmed-abdulsalam-4b16b7211/"><i class='bx bxl-linkedin' ></i></a>
-			</div>
-		</div>
-
-		<div class="contact-form">
-			<form action="">
-				<input type="name" placeholder="Your Name" required>
-				<input type="email" placeholder="Your Email Address" required>
-				<input type="" placeholder="Your Mobile Number" required>
-				<textarea name="" id="" cols="35" rows="10" placeholder="How Can I Help You" required></textarea>
-				<input type="submit" value="Send Message" class="submit" required>
-			</form>
-		</div>
-	</section>
-
-	<!----end section design--->
-	<section class="end">
-		<div class="last-text">
-			<p>Copyright © 2022 by Ahmed Abdulsalam All Rights Reserved.</p>
-		</div>
-
-		<div class="top">
-			<a href="#home"><i class='bx bx-up-arrow-alt' ></i></a>
-		</div>
-	</section>
-
-	<!---custom js link--->
-	<script type="text/javascript" src="js/script.js"></script>
-
+    <script src="assets/js/main.js" defer></script>
 </body>
 </html>
