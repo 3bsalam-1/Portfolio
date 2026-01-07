@@ -33,8 +33,9 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          # Custom domain (3bsalam.dev) serves from the root, so Vite base must be `/`.
-          BASE_PATH: /
+          # GitHub Pages serves the site from /<repo-name>/; this sets the Vite base.
+          # For custom domain (3bsalam.dev), change this to BASE_PATH: /
+          BASE_PATH: /${{ github.event.repository.name }}/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
