@@ -1,0 +1,153 @@
+/* Shared CSS Patterns */
+
+/* Glass Panel Effect */
+.glass-panel {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: var(--glass-blur);
+    box-shadow: var(--glass-shadow);
+    border-radius: 16px;
+}
+
+/* Gradient Text */
+.gradient-text {
+    background: var(--gradient-main);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Button Base Styles */
+.btn-base {
+    padding: 0.9rem 2rem;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    letter-spacing: 0.5px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-base:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+}
+
+/* Button Primary */
+.btn-primary-base {
+    background: transparent;
+    color: var(--accent-primary);
+    border: 2px solid var(--accent-primary);
+    box-shadow: 0 0 20px rgba(255, 211, 105, 0.2), inset 0 0 20px rgba(255, 211, 105, 0.05);
+}
+
+.btn-primary-base:hover {
+    background: var(--gradient-main);
+    color: #000;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 40px rgba(255, 211, 105, 0.6), inset 0 0 20px rgba(255, 211, 105, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Button Secondary */
+.btn-secondary-base {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 211, 105, 0.3);
+}
+
+.btn-secondary-base:hover {
+    background: rgba(255, 211, 105, 0.1);
+    border-color: var(--accent-primary);
+    transform: translateY(-2px);
+}
+
+/* Card Styles */
+.card-base {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+}
+
+.card-base:hover {
+    border-color: var(--accent-primary);
+    box-shadow: 0 8px 32px rgba(255, 211, 105, 0.1);
+}
+
+/* Icon Container */
+.icon-container {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 211, 105, 0.1);
+    border: 1.5px solid rgba(255, 211, 105, 0.3);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.icon-container:hover {
+    background: var(--gradient-main);
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 20px rgba(255, 211, 105, 0.3);
+    transform: scale(1.1);
+}
+
+/* Section Title */
+.section-title-base {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-primary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+    margin: 0;
+}
+
+/* Glow Animation */
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(255, 211, 105, 0.2), inset 0 0 20px rgba(255, 211, 105, 0.05);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(255, 211, 105, 0.4), inset 0 0 20px rgba(255, 211, 105, 0.1);
+    }
+}
+
+.glow-animation {
+    animation: glow 3s ease-in-out infinite;
+}
+
+/* Smooth Transition */
+.smooth-transition {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Mobile Responsive Text */
+@media (max-width: 768px) {
+    .section-title-base {
+        font-size: 2rem;
+    }
+
+    .btn-base {
+        padding: 0.8rem 1.6rem;
+        font-size: 0.9rem;
+    }
+
+    .card-base {
+        padding: 1.5rem;
+    }
+}

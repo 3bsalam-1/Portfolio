@@ -1,68 +1,93 @@
-# Ahmed Mohamed — Portfolio
+# Ahmed Mohamed — AI/ML Portfolio
 
-Professional static portfolio showcasing AI/ML projects and skills.
+A modern, responsive portfolio website built with **React**, **Vite**, and **Framer Motion**. It showcases AI/ML projects with a stunning neural network background, glassmorphism design, and smooth animations.
 
-## 🚀 Overview
-A minimalist, single-page static site built with semantic HTML, plain CSS, and vanilla JavaScript. It highlights selected projects (ML, CV, RL, APIs) and includes a neural-canvas background, theme toggle, and client-side project filtering.
+## 🚀 Features
 
-## 🔧 Features
-- Clean single-page layout: `index.html` (content) + `assets/css/style.css` (styles) + `assets/js/main.js` (behavior)
-- Project filtering powered by `data-filter` / `data-category` attributes
-- Neural animated background rendered to a `<canvas id="neuralCanvas">`
-- Light/dark theme via `data-theme="light"` and `#themeToggle`
-- Favicon support (`img/favicon.png`)
+- **Modern Tech Stack**: Built with React 19 + Vite for blazing fast performance.
+- **Interactive UI**: Glassmorphism design with backdrop blurred elements.
+- **Dynamic Animations**:
+  - Smooth page transitions and scroll reveals driven by Framer Motion.
+  - Interactive neural network background using HTML5 Canvas.
+  - Typewriter effects and hover interactions.
+- **Theme System**: Toggles between Dark (default) and Light modes with persistent preference.
+- **Project Filtering**: Filter projects by category (ML, CV, NLP, etc.) with animated layout changes.
+- **Responsive Design**: Fully responsive layout that looks great on mobile, tablet, and desktop.
 
-## 📁 Project structure
-- `index.html` — main markup and content
-- `assets/css/style.css` — extracted site styles
-- `assets/js/main.js` — interactivity and animations (loaded with `defer`)
-- `img/` — static images (avatar, favicon)
-- `.github/copilot-instructions.md` — agent guidance for helpers and bots
-- `LICENSE` — MIT License
+## 🛠️ Tech Stack
 
-## ▶️ Quick start (local preview)
-Open `index.html` in your browser or serve the repo root for correct relative paths:
+- **Frontend**: React.js, Vite
+- **Styling**: CSS Modules, CSS Variables, Glassmorphism
+- **Animations**: Framer Motion, HTML5 Canvas
+- **Icons**: React Icons
 
-- Python: `python -m http.server 8000` (visit http://localhost:8000)
-- VS Code Live Server: open `index.html` and click **Go Live**
+## 📦 Installation & Setup
 
-Check flows after changes: theme toggle, neural animation, filter buttons, and responsive behavior (≤768px).
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/3bsalam-1/Portfolio.git
+   cd Portfolio
+   ```
 
-## ✍️ How to add or update a featured project
-1. Edit `index.html` and add a `div.project-card` inside `#projects .projects-grid`.
-2. Set `data-category` to one of: `ml`, `cv`, `rl`, `api`, `nlp`.
-3. Include `project-image`, `project-info`, `project-tags`, and a `project-link`.
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-Example snippet:
+3. **Start Development Server**
+   ```bash
+   npm run dev
+   ```
+   Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-```html
-<div class="project-card" data-category="ml">
-  <div class="project-image">🏥</div>
-  <div class="project-info">
-    <div class="project-tags"><span class="tag">Healthcare</span></div>
-    <h3>Project Title</h3>
-    <p>Short description.</p>
-    <div class="project-links"><a href="https://github.com/owner/repo" target="_blank" rel="noopener noreferrer">View Code →</a></div>
-  </div>
-</div>
+4. **Build for Production**
+   ```bash
+   npm run build
+   ```
+   The output will be in the `dist/` directory, ready for deployment.
+
+## 🌐 Deployment
+
+- **GitHub Pages (recommended default)**
+  1. Push to `main` with the included workflow at `.github/workflows/deploy.yml`.
+  2. In the repo settings, enable GitHub Pages with source set to “GitHub Actions.”
+  3. The action builds with `BASE_PATH` set to `/<repo-name>/` so asset URLs work under the Pages subpath.
+  4. If you use a custom domain on Pages, set `BASE_PATH=/` in the workflow env.
+
+- **Local preview of the Pages build**
+  ```bash
+  # replace <repo-name> with your repository name
+  BASE_PATH="/<repo-name>/" npm run build
+  npm run preview
+  ```
+
+- **Other hosts**
+  - **Vercel / Netlify**: Build command `npm run build`, output folder `dist`. Keep `BASE_PATH=/` (default).
+  - **Static file hosts / S3 + CloudFront**: Upload the `dist/` directory; no extra configuration needed as long as assets stay at the root.
+
+## 📂 Project Structure
+
+```
+src/
+├── components/
+│   ├── Effects/      # Visual effects (NeuralBackground, Typewriter)
+│   ├── Layout/       # Core layout (Navbar, Footer)
+│   ├── Sections/     # Page sections (Hero, About, Projects, Contact)
+│   └── UI/           # Reusable UI components
+├── data/             # Static data (projects.js, skills.js)
+├── hooks/            # Custom React hooks
+├── App.jsx           # Main application layout
+├── index.css         # Global styles & design system
+└── main.jsx          # Entry point
 ```
 
-## ✅ PR checklist (visual & functional)
-- Add a full-size screenshot + a mobile screenshot (≤768px)
-- Verify theme toggle (light & dark) and neural canvas render correctly
-- Confirm project filters work and links open in a new tab (use `rel="noopener noreferrer"`)
-- No console errors in browser devtools
+## 📄 License
 
-## ⚖️ License
-This repository is licensed under the MIT License — see the `LICENSE` file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 💬 Contact
-Author: Ahmed Mohamed — `3bsalam0@gmail.com`
 
-<div align="center">
-
-**⭐ Star this repository if you find it helpful!**
-
-Made with ❤️ by Ahmed Abdulsalam
-
-</div>
+**Ahmed Mohamed** - AI/ML Engineer
+- Email: [3bsalam0@gmail.com](mailto:3bsalam0@gmail.com)
+- LinkedIn: [Ahmed Mohamed](https://linkedin.com/in/ahmed-mohamed)
+- GitHub: [@3bsalam-1](https://github.com/3bsalam-1)
