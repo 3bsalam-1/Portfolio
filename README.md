@@ -39,6 +39,7 @@ Example: `https://3bsalam-1.github.io/Portfolio/`
   - Scroll & section reveals via Framer Motion
   - Interactive neural network background (HTML5 Canvas)
   - Typewriter effects and hover interactions
+- **AI Chat (Portfolio Assistant)** – Immersive "Chat Mode" powered by GitHub Models (`gpt-4o`) + RAG over your PDFs. Toggleable from the Hero section.
 - **Theme System** – Dark (default) / Light with persistent preference (localStorage)
 - **Project Filtering** – Filter ML/CV/NLP projects with animated layout changes
 - **Responsive Layout** – Optimized for mobile, tablet, and desktop
@@ -56,6 +57,54 @@ Example: `https://3bsalam-1.github.io/Portfolio/`
 | Animation  | Framer Motion, HTML5 Canvas               |
 | Icons      | React Icons                               |
 | Deployment | GitHub Pages (via GitHub Actions)         |
+
+---
+
+## 🤖 AI Chat Backend (separate repo + Render)
+
+This portfolio repo contains a backend scaffold at `portfolio-ai-backend/`.
+
+Recommended setup:
+- **Frontend**: this repo → GitHub Pages (static)
+- **Backend**: separate repo `portfolio-ai-backend` → Render (FastAPI)
+
+### 1) Create the backend repo
+
+1. Create a new GitHub repo named `portfolio-ai-backend`
+2. Copy the contents of the local folder `portfolio-ai-backend/` into that repo
+3. Deploy it on Render (Docker)
+
+### 2) Render secrets / env
+
+Set these in Render (Dashboard → Environment):
+- `GITHUB_TOKEN` (secret)
+- `ADMIN_TOKEN` (secret)
+
+Optional (recommended for browser access):
+- `ALLOWED_ORIGINS`: comma-separated origins, e.g.
+  - `https://3bsalam.dev`
+  - `https://3bsalam-1.github.io`
+
+### 3) Upload PDFs for RAG
+
+After backend is live, upload your PDFs (CV, certificates, etc.) using:
+- `POST /api/admin/upload-pdf` with header `X-Admin-Token: <ADMIN_TOKEN>`
+
+The backend stores PDFs on disk and rebuilds its retrieval index automatically.
+
+### 4) Connect frontend to backend
+
+This frontend calls:
+- `${VITE_API_BASE}/api/chat`
+
+For GitHub Pages, `VITE_API_BASE` is injected during the build by the workflow in `.github/workflows/deploy.yml`.
+
+If you want to override it without code changes, add a GitHub repo variable:
+- `Settings → Secrets and variables → Actions → Variables`
+- Name: `VITE_API_BASE`
+- Value: `https://portfolio-ai-backend.onrender.com`
+
+For local dev, you can use the example file `frontend.env.example` as a template.
 
 ---
 

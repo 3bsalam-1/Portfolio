@@ -8,17 +8,18 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-_backup_original
-dist-ssr
-*.local
+# RAG Storage (Allow PDFs, ignore index)
+portfolio-ai-backend/
 
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
 .idea
+.cursor
 .DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+.env

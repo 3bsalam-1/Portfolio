@@ -25,7 +25,7 @@ const Navbar = ({ theme, toggleTheme }) => {
     const handleScroll = throttle(() => {
       setScrolled(window.scrollY > 50);
     }, 16); // Max 60fps (16ms per frame)
-    
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -37,7 +37,7 @@ const Navbar = ({ theme, toggleTheme }) => {
     if (!canvas || !wrapper) return;
 
     const ctx = canvas.getContext('2d');
-    
+
     const updateCanvasSize = () => {
       const rect = wrapper.getBoundingClientRect();
       canvas.width = rect.width;
@@ -103,7 +103,7 @@ const Navbar = ({ theme, toggleTheme }) => {
     const resizeHandler = () => {
       updateCanvasSize();
     };
-    
+
     window.addEventListener('resize', resizeHandler);
     return () => window.removeEventListener('resize', resizeHandler);
   }, []);
@@ -122,41 +122,41 @@ const Navbar = ({ theme, toggleTheme }) => {
           <div className="logo-wrapper" ref={wrapperRef}>
             {/* Dynamic Canvas for Neural Connections */}
             <canvas ref={canvasRef} className="neural-canvas"></canvas>
-            
+
             {/* Moving Neural Network Nodes - Increased to 8 */}
-            <div 
-              className="neural-node node-1" 
+            <div
+              className="neural-node node-1"
               ref={el => nodeRefs.current[0] = el}
             ></div>
-            <div 
-              className="neural-node node-2" 
+            <div
+              className="neural-node node-2"
               ref={el => nodeRefs.current[1] = el}
             ></div>
-            <div 
-              className="neural-node node-3" 
+            <div
+              className="neural-node node-3"
               ref={el => nodeRefs.current[2] = el}
             ></div>
-            <div 
-              className="neural-node node-4" 
+            <div
+              className="neural-node node-4"
               ref={el => nodeRefs.current[3] = el}
             ></div>
-            <div 
-              className="neural-node node-5" 
+            <div
+              className="neural-node node-5"
               ref={el => nodeRefs.current[4] = el}
             ></div>
-            <div 
-              className="neural-node node-6" 
+            <div
+              className="neural-node node-6"
               ref={el => nodeRefs.current[5] = el}
             ></div>
-            <div 
-              className="neural-node node-7" 
+            <div
+              className="neural-node node-7"
               ref={el => nodeRefs.current[6] = el}
             ></div>
-            <div 
-              className="neural-node node-8" 
+            <div
+              className="neural-node node-8"
               ref={el => nodeRefs.current[7] = el}
             ></div>
-            
+
             {/* Center Avatar */}
             <img src="https://avatars.githubusercontent.com/u/121203923?v=4" alt="Ahmed Mohamed" className="logo-image" />
           </div>
@@ -177,7 +177,7 @@ const Navbar = ({ theme, toggleTheme }) => {
           <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle Theme">
             {theme === 'dark' ? <FaMoon /> : <FaSun />}
           </button>
-          <a href="/cv.pdf" download className="cv-btn">
+          <a href={`${import.meta.env.BASE_URL}cv.pdf`} download className="cv-btn">
             Resume
           </a>
         </div>
@@ -211,7 +211,7 @@ const Navbar = ({ theme, toggleTheme }) => {
                   {theme === 'dark' ? 'Dark Mode' : 'Light Mode'}
                   {theme === 'dark' ? <FaMoon /> : <FaSun />}
                 </button>
-                <a href="/cv.pdf" download className="cv-btn mobile" onClick={() => setIsOpen(false)}>
+                <a href={`${import.meta.env.BASE_URL}cv.pdf`} download className="cv-btn mobile" onClick={() => setIsOpen(false)}>
                   Download Resume
                 </a>
               </div>

@@ -30,12 +30,34 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Configure build environment
+        env:
+          REPO_VITE_API_BASE: ${{ vars.VITE_API_BASE }}
+          SECRET_VITE_API_BASE: ${{ secrets.VITE_API_BASE }}
+        run: |
+          # BASE_PATH: if custom domain (public/CNAME) exists, build for root (/)
+          if [ -f "public/CNAME" ]; then
+            echo "BASE_PATH=/" >> "$GITHUB_ENV"
+          else
+            echo "BASE_PATH=/${{ github.event.repository.name }}/" >> "$GITHUB_ENV"
+          fi
+
+          # VITE_API_BASE: check Secret first, then Variable, then valid default
+          if [ -n "$SECRET_VITE_API_BASE" ]; then
+            echo "VITE_API_BASE=$SECRET_VITE_API_BASE" >> "$GITHUB_ENV"
+          elif [ -n "$REPO_VITE_API_BASE" ]; then
+            echo "VITE_API_BASE=$REPO_VITE_API_BASE" >> "$GITHUB_ENV"
+          else
+            echo "VITE_API_BASE=https://medi-ai-api.onrender.com" >> "$GITHUB_ENV"
+          fi
+
       - name: Build
         run: npm run build
         env:
           # GitHub Pages serves the site from /<repo-name>/; this sets the Vite base.
           # For custom domain (3bsalam.dev), change this to BASE_PATH: /
-          BASE_PATH: /${{ github.event.repository.name }}/
+          BASE_PATH: ${{ env.BASE_PATH }}
+          VITE_API_BASE: ${{ env.VITE_API_BASE }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -52,4 +74,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-

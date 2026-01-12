@@ -6,7 +6,6 @@ import About from './components/Sections/About';
 import Projects from './components/Sections/Projects';
 import Contact from './components/Sections/Contact';
 import NeuralBackground from './components/Effects/NeuralBackground';
-import { motion, AnimatePresence } from 'framer-motion';
 
 function App() {
   const [theme, setTheme] = useState('dark');
