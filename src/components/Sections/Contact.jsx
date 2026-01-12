@@ -90,7 +90,7 @@ const Contact = () => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .contact-section {
           padding: 8rem 2rem;
         }

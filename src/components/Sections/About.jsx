@@ -104,7 +104,7 @@ const About = () => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .about-section {
           padding: 6rem 0;
         }

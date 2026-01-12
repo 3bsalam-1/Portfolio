@@ -220,7 +220,7 @@ const Navbar = ({ theme, toggleTheme }) => {
         </AnimatePresence>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .nav {
           position: fixed;
           top: 20px;

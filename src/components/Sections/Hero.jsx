@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Typewriter from '../Effects/Typewriter';
 import { FaArrowRight } from 'react-icons/fa';
@@ -24,6 +24,17 @@ const Hero = () => {
 
   const [showChat, setShowChat] = useState(false);
   const [connectionStatus, setConnectionStatus] = useState('checking'); // 'checking' | 'connected' | 'disconnected'
+  const chatLogRef = useRef(null);
+
+  // Arabic detection
+  const isArabic = (text) => /[\u0600-\u06FF]/.test(text);
+
+  // Auto-scroll to bottom of chat log
+  useEffect(() => {
+    if (chatLogRef.current) {
+      chatLogRef.current.scrollTop = chatLogRef.current.scrollHeight;
+    }
+  }, [messages, isLoading]);
 
   // Check backend health on mount
   React.useEffect(() => {
@@ -82,10 +93,50 @@ const Hero = () => {
         throw new Error(detail);
       }
 
-      const data = await res.json();
-      const answer = (data?.answer || '').trim() || "I couldn't generate a response right now.";
-      setMessages((prev) => [...prev, { role: 'assistant', content: answer }]);
-      setCitations(Array.isArray(data?.citations) ? data.citations : []);
+      // Consuming ReadableStream
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let done = false;
+      let assistantAnswer = '';
+
+      // Initialize assistant message in state
+      setMessages((prev) => [...prev, { role: 'assistant', content: '' }]);
+
+      while (!done) {
+        const { value, done: doneReading } = await reader.read();
+        done = doneReading;
+        const chunkValue = decoder.decode(value);
+
+        // Process SSE lines
+        const lines = chunkValue.split('\n');
+        for (const line of lines) {
+          if (line.startsWith('data: ')) {
+            const dataStr = line.slice(6).trim();
+            if (dataStr === '[DONE]') {
+              done = true;
+              break;
+            }
+            try {
+              const data = JSON.parse(dataStr);
+              if (data.type === 'citations') {
+                setCitations(data.citations || []);
+              } else if (data.type === 'content') {
+                assistantAnswer += data.content;
+                // Update ONLY the last message (the assistant one we just added)
+                setMessages((prev) => {
+                  const newMsgs = [...prev];
+                  newMsgs[newMsgs.length - 1] = { role: 'assistant', content: assistantAnswer };
+                  return newMsgs;
+                });
+              } else if (data.type === 'error') {
+                throw new Error(data.detail || 'Streaming error');
+              }
+            } catch (e) {
+              console.error("Error parsing stream chunk:", e);
+            }
+          }
+        }
+      }
     } catch (e) {
       setError(e?.message || 'Something went wrong. Please try again.');
     } finally {
@@ -229,16 +280,20 @@ const Hero = () => {
                 ))}
               </div>
 
-              <div className="chat-log" aria-live="polite">
+              <div className="chat-log" ref={chatLogRef} aria-live="polite">
                 {messages.slice(-8).map((m, idx) => (
                   <div
                     key={`${m.role}-${idx}`}
                     className={`chat-bubble ${m.role === 'user' ? 'user' : 'assistant'}`}
+                    style={{
+                      direction: isArabic(m.content) ? 'rtl' : 'ltr',
+                      textAlign: isArabic(m.content) ? 'right' : 'left'
+                    }}
                   >
                     {m.content}
                   </div>
                 ))}
-                {isLoading && (
+                {isLoading && messages[messages.length - 1]?.role !== 'assistant' && (
                   <div className="chat-bubble assistant">
                     Thinking…
                   </div>
@@ -252,7 +307,7 @@ const Hero = () => {
                   className="chat-input"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="Ask about experience, projects, skills, CV…"
+                  placeholder="Ask about experience, skills... اسأل عن الخبرة والمهارات"
                   rows={2}
                   disabled={isLoading}
                   onKeyDown={(e) => {
@@ -290,7 +345,7 @@ const Hero = () => {
         </AnimatePresence>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .hero {
           min-height: 100vh;
           display: flex;
@@ -748,46 +803,6 @@ const Hero = () => {
           background: rgba(255, 211, 105, 0.2);
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-          .hero {
-            padding: 100px 1rem 2rem;
-          }
-
-          .hero-content.glass-panel {
-            padding: 2rem 1.5rem;
-            border-radius: 16px;
-          }
-
-          .hero-title {
-            font-size: 2.2rem;
-            margin-bottom: 1rem;
-          }
-
-          .hero-subtitle {
-            font-size: 1.2rem;
-            min-height: auto;
-          }
-
-          .hero-description {
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-          }
-
-          .hero-chat {
-            padding: 1rem;
-          }
-
-          .chat-header {
-            flex-direction: column;
-            align-items: flex-start;
-          }
-
-          .chat-input-row {
-            grid-template-columns: 1fr;
-          }
-
-        /* Connection Status Indicator */
         .connection-status {
           display: flex;
           align-items: center;
@@ -801,16 +816,16 @@ const Hero = () => {
           width: 8px;
           height: 8px;
           border-radius: 50%;
-          background: var(--text-tertiary); /* Default/Checking */
+          background: var(--text-tertiary);
         }
 
         .status-dot.connected {
-          background: #4ade80; /* Green */
+          background: #4ade80;
           box-shadow: 0 0 8px rgba(74, 222, 128, 0.4);
         }
 
         .status-dot.disconnected {
-          background: #ef4444; /* Red */
+          background: #ef4444;
           box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
         }
 
@@ -818,8 +833,69 @@ const Hero = () => {
           color: var(--text-tertiary);
         }
 
+        /* Responsive */
+        @media (max-width: 768px) {
+          .hero {
+            padding: 80px 1rem 2rem;
+          }
+
+          .hero-content.glass-panel {
+            padding: 1.5rem 1rem;
+            border-radius: 16px;
+          }
+
+          .hero-title {
+            font-size: 2rem;
+            margin-bottom: 0.8rem;
+          }
+
+          .hero-subtitle {
+            font-size: 1.1rem;
+          }
+
+          .chat-interface.glass-panel {
+            padding: 1rem;
+            height: calc(100vh - 120px);
+            max-height: none;
+            border-radius: 16px;
+          }
+
+          .chat-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+          }
+
+          .chat-log {
+            padding: 0.5rem;
+            padding-right: 0.7rem;
+          }
+
+          .chat-bubble {
+            font-size: 0.85rem;
+            padding: 0.6rem 0.8rem;
+            max-width: 98%;
+          }
+
+          .chip {
+            padding: 0.3rem 0.6rem;
+            font-size: 0.72rem;
+          }
+
+          .chat-input-row {
+            grid-template-columns: 1fr;
+            gap: 0.5rem;
+          }
+
           .chat-send {
-            height: 44px;
+            height: 40px;
+            padding: 0;
+            font-size: 0.85rem;
+          }
+
+          .connection-status {
+            justify-content: center;
+            margin-top: 0.5rem;
           }
 
           .cta-buttons {

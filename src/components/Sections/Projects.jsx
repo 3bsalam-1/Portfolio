@@ -63,7 +63,7 @@ const Projects = () => {
           </button>
 
           <div className="projects-grid" ref={scrollContainer}>
-            <AnimatePresence mode="wait">
+            <AnimatePresence mode="popLayout">
               {filteredProjects.map((project) => {
                 const Icon = project.icon;
                 return (

@@ -76,7 +76,7 @@ const Footer = () => {
                 </div>
             </div>
 
-            <style jsx>{`
+            <style>{`
                 .footer {
                     background: var(--glass-bg);
                     backdrop-filter: var(--glass-blur);
