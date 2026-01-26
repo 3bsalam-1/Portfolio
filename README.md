@@ -12,15 +12,9 @@ Showcasing AI/ML projects with a neural-network background, glassmorphism UI, an
 <img alt="Vite" src="https://img.shields.io/badge/Vite-7.2.4-646CFF?logo=vite&logoColor=white" />
 <img alt="License" src="https://img.shields.io/badge/License-MIT-yellow" />
 
-<br /><br />
-
-**Live (GitHub Pages)**  
-`https://<your-username>.github.io/Portfolio/`  
-Example: `https://3bsalam-1.github.io/Portfolio/`
 
 </div>
 
----
 
 ## 🚀 Overview
 
